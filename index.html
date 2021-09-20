@@ -16,8 +16,11 @@
   </style>
 
   <script>
-    var myAudio = new Audio('cruz1.mp3');
+    var myAudio = document.createElement('audio');
 
+    if (myAudio.canPlayType('audio/mpeg')) {
+      myAudio.setAttribute('src', 'cruz1.mp3');
+    }
     var px = 50; // Position x and y
     var py = 50;
     var vx = 0.0; // Velocity x and y
@@ -47,7 +50,7 @@
               px = Math.max(0, Math.min(98, px)) // Clip px between 0-98
               vx = 0;
             }
-            if (!started) {
+            if (started == false) {
               myAudio.play();
               started = true;
             }
