@@ -32,10 +32,10 @@
     var vy = 0.0;
     var updateRate = 1 / 60; // Sensor refresh rate
     var started = false;
-    function getAudio() {
-      myAudio.play();
+    // function getAudio() {
+    //   myAudio.play();
 
-    }
+    // }
     function getAccel() {
       DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
