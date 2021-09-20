@@ -142,8 +142,8 @@
             document.getElementById('accelReading').textContent = change;
             var audio = document.getElementById("audio");
             var cruzX = getRandomInt(3);
-            audio.setAttribute('src', 'cruz2.mp3'); \
-            //  audio.setAttribute('src', 'cruz3.mp3');
+            if (cruzX == 0) { audio.setAttribute('src', 'cruz2.mp3'); }
+            if (cruzX == 1) { audio.setAttribute('src', 'cruz3.mp3'); }
             if (cruzX == 2) { audio.setAttribute('src', 'cruz4.mp3'); }
 
 
