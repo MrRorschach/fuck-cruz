@@ -15,67 +15,7 @@
     }
   </style>
 
-  <script>
-    // var myAudio = document.createElement('audio');
 
-    // if (myAudio.canPlayType('audio/mpeg')) {
-    //   myAudio.setAttribute('src', 'cruz1.mp3');
-    // }
-    //TODO Fix this shit
-    var slider = document.getElementById("sensitivity")
-    console.log(slider.value)
-    document.getElementById("sensitivityReading").textContent = slider.value;
-
-    // var x = document.getElementById("sensitivity").value;
-    // console.log(x);
-    // document.getElementById("sensitivityReading").innerHTML = x;
-
-    // var px = 50; // Position x and y
-    // var py = 50;
-    // var vx = 0.0; // Velocity x and y
-    // var vy = 0.0;
-    // var updateRate = 1 / 60; // Sensor refresh rate
-    // var started = false;
-    // function getAudio() {
-    //   myAudio.play();
-
-    // }
-    function getAccel() {
-      DeviceMotionEvent.requestPermission().then(response => {
-        if (response == 'granted') {
-          // Add a listener to get smartphone orientation
-          // in the alpha-beta-gamma axes (units in degrees)
-
-          var sensitivity = 20;
-
-          // Position variables
-          var x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
-
-          window.addEventListener('devicemotion', function (e) {
-            x1 = e.accelerationIncludingGravity.x;
-            y1 = e.accelerationIncludingGravity.y;
-            z1 = e.accelerationIncludingGravity.z;
-          }, false);
-
-          setInterval(function () {
-            var change = Math.abs(x1 - x2 + y1 - y2 + z1 - z2);
-
-            if (change > sensitivity) {
-              alert('Shake!');
-              document.getElementById('accelReading').textContent = change;
-
-            }
-
-            // Update new position
-            x2 = x1;
-            y2 = y1;
-            z2 = z1;
-          }, 150);
-          //OLD CODE STUFF
-        }
-      });
-    }
-  </script>
 </head>
 
 <body style="background-color:lightblue;">
@@ -95,5 +35,57 @@
 
   <div class="indicatorDot" style="left:30%; top:30%;"></div>
 </body>
+<script>
+  // var myAudio = document.createElement('audio');
+
+  // if (myAudio.canPlayType('audio/mpeg')) {
+  //   myAudio.setAttribute('src', 'cruz1.mp3');
+  // }
+  //TODO Fix this shit
+  var slider = document.getElementById("sensitivity")
+  var sensValue = 0;
+
+
+  slider.oninput = function () {
+    sensValue = slider.value;
+    document.getElementById("sensitivityReading").textContent = slider.value;
+  }
+
+  function getAccel() {
+    DeviceMotionEvent.requestPermission().then(response => {
+      if (response == 'granted') {
+        // Add a listener to get smartphone orientation
+        // in the alpha-beta-gamma axes (units in degrees)
+
+        var sensitivity = sensValue;
+        console.log(sensValue)
+        // Position variables
+        var x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
+
+        window.addEventListener('devicemotion', function (e) {
+          x1 = e.accelerationIncludingGravity.x;
+          y1 = e.accelerationIncludingGravity.y;
+          z1 = e.accelerationIncludingGravity.z;
+        }, false);
+
+        setInterval(function () {
+          var change = Math.abs(x1 - x2 + y1 - y2 + z1 - z2);
+
+          if (change > sensitivity) {
+            alert('Shake!');
+            document.getElementById('accelReading').textContent = change;
+
+          }
+
+          // Update new position
+          x2 = x1;
+          y2 = y1;
+          z2 = z1;
+        }, 150);
+        //OLD CODE STUFF
+      }
+    });
+  }
+</script>
 
 </html>
