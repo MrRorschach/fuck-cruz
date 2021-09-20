@@ -41,46 +41,86 @@
         if (response == 'granted') {
           // Add a listener to get smartphone orientation
           // in the alpha-beta-gamma axes (units in degrees)
-          window.addEventListener('deviceorientation', (event) => {
-            // Expose each orientation angle in a more readable way
-            rotation_degrees = event.alpha;
-            frontToBack_degrees = event.beta;
-            leftToRight_degrees = event.gamma;
-            document.getElementById('accelReading').textContent = rotation_degrees;
-            // Update velocity according to how tilted the phone is
-            // Since phones are narrower than they are long, double the increase to the x velocity
-            vx = vx + leftToRight_degrees * updateRate * 2;
-            vy = vy + frontToBack_degrees * updateRate;
 
-            // Update position and clip it to bounds
-            px = px + vx * .5;
-            if (px > 98 || px < 0) {
-              px = Math.max(0, Math.min(98, px)) // Clip px between 0-98
-              vx = 0;
-            }
-            // if (started == false) {
-            //   myAudio.play();
-            //   started = true;
-            // }
-            if (px > 70) {
-              // var h = document.createElement("H1");
-              // var t = document.createTextNode("Hello World");
-              // h.appendChild(t);
-              // document.body.appendChild(h);
+          var sensitivity = 20;
+
+          // Position variables
+          var x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
+
+          window.addEventListener('devicemotion', function (e) {
+            x1 = e.accelerationIncludingGravity.x;
+            y1 = e.accelerationIncludingGravity.y;
+            z1 = e.accelerationIncludingGravity.z;
+          }, false);
+
+          setInterval(function () {
+            var change = Math.abs(x1 - x2 + y1 - y2 + z1 - z2);
+
+            if (change > sensitivity) {
+              alert('Shake!');
+              document.getElementById('accelReading').textContent = change;
+
             }
 
-            py = py + vy * .5;
-            if (py > 98 || py < 0) {
-              py = Math.max(0, Math.min(98, py)) // Clip py between 0-98
-              vy = 0;
-            }
+            // Update new position
+            x2 = x1;
+            y2 = y1;
+            z2 = z1;
 
-            dot = document.getElementsByClassName("indicatorDot")[0]
-            dot.setAttribute('style', "left:" + (px) + "%;" +
-              "top:" + (py) + "%;");
 
-          });
-        }
+
+
+
+
+
+
+
+
+
+
+
+            //OLD CODE STUFF
+
+            window.addEventListener('deviceorientation', (event) => {
+              // Expose each orientation angle in a more readable way
+              rotation_degrees = event.alpha;
+              frontToBack_degrees = event.beta;
+              leftToRight_degrees = event.gamma;
+              document.getElementById('accelReading').textContent = rotation_degrees;
+              // Update velocity according to how tilted the phone is
+              // Since phones are narrower than they are long, double the increase to the x velocity
+              vx = vx + leftToRight_degrees * updateRate * 2;
+              vy = vy + frontToBack_degrees * updateRate;
+
+              // Update position and clip it to bounds
+              px = px + vx * .5;
+              if (px > 98 || px < 0) {
+                px = Math.max(0, Math.min(98, px)) // Clip px between 0-98
+                vx = 0;
+              }
+              // if (started == false) {
+              //   myAudio.play();
+              //   started = true;
+              // }
+              if (px > 70) {
+                // var h = document.createElement("H1");
+                // var t = document.createTextNode("Hello World");
+                // h.appendChild(t);
+                // document.body.appendChild(h);
+              }
+
+              py = py + vy * .5;
+              if (py > 98 || py < 0) {
+                py = Math.max(0, Math.min(98, py)) // Clip py between 0-98
+                vy = 0;
+              }
+
+              dot = document.getElementsByClassName("indicatorDot")[0]
+              dot.setAttribute('style', "left:" + (px) + "%;" +
+                "top:" + (py) + "%;");
+
+            });
+          }
       });
     }
   </script>
