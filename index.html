@@ -16,15 +16,15 @@
   </style>
 
   <script>
-    var myAudio = document.createElement('audio');
+    // var myAudio = document.createElement('audio');
 
-    if (myAudio.canPlayType('audio/mpeg')) {
-      myAudio.setAttribute('src', 'cruz1.mp3');
-    }
+    // if (myAudio.canPlayType('audio/mpeg')) {
+    //   myAudio.setAttribute('src', 'cruz1.mp3');
+    // }
     //TODO Fix this shit
 
-    var x = document.getElementById("sensitivity").value
-    document.getElementById("sensitivityReading").innerHTML = x;
+    // var x = document.getElementById("sensitivity").value
+    // document.getElementById("sensitivityReading").innerHTML = x;
 
     var px = 50; // Position x and y
     var py = 50;
@@ -46,7 +46,7 @@
             rotation_degrees = event.alpha;
             frontToBack_degrees = event.beta;
             leftToRight_degrees = event.gamma;
-            document.getElementById('accelReading').innerHTML = rotation_degrees;
+            document.getElementById('accelReading').textContent = rotation_degrees;
             // Update velocity according to how tilted the phone is
             // Since phones are narrower than they are long, double the increase to the x velocity
             vx = vx + leftToRight_degrees * updateRate * 2;
