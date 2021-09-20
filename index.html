@@ -19,7 +19,7 @@
     var myAudio = document.createElement('audio');
 
     if (myAudio.canPlayType('audio/mpeg')) {
-      myAudio.setAttribute('src', './cruz1.mp3');
+      myAudio.setAttribute('src', 'cruz1.mp3');
     }
     var px = 50; // Position x and y
     var py = 50;
@@ -27,7 +27,10 @@
     var vy = 0.0;
     var updateRate = 1 / 60; // Sensor refresh rate
     var started = false;
+    function getAudio() {
+      myAudio.play();
 
+    }
     function getAccel() {
       DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
@@ -50,10 +53,10 @@
               px = Math.max(0, Math.min(98, px)) // Clip px between 0-98
               vx = 0;
             }
-            if (started == false) {
-              myAudio.play();
-              started = true;
-            }
+            // if (started == false) {
+            //   myAudio.play();
+            //   started = true;
+            // }
             if (px > 70) {
               var h = document.createElement("H1");
               var t = document.createTextNode("Hello World");
@@ -85,6 +88,7 @@
   <button id="accelPermsButton" style="height:50px;" onclick="getAccel()">
     <h1>Get Accelerometer Permissions</h1>
   </button>
+  <button id="audioPermsButton" style="height:50px;" onclick="getAudio()"></button>
   <div class="indicatorDot" style="left:30%; top:30%;"></div>
 </body>
 
