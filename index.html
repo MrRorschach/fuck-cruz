@@ -64,11 +64,11 @@
   <button id="accelPermsButton" style="height:50px;" onclick="getAccel()">
     <h1>Get Accelerometer Permissions</h1>
   </button>
-  <button id="audioPermsButton" style="height:50px;" onclick="setupAudio()">
+  <button id="audioPermsButton" style="height:50px;">
     <h1>Test Audio</h1>
   </button>
-  <input type="button" value="PLAY" onclick="play()">
   <audio id="audio" src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"></audio>
+
 
   <div style="width:95vw;padding-top:4rem;">
     <input type="range" id="sensitivity" name="sensitivity" min="0" max="100" value="90" step="1" style="width:100%">
@@ -77,10 +77,10 @@
     <h1 id="accelReading"></h1>
   </div>
 
-  <div class="indicatorDot" style="left:30%; top:30%;"></div>
+
+
 </body>
 <script>
-
 
   var slider = document.getElementById("sensitivity")
   var sensValue = 0;
@@ -88,6 +88,7 @@
 
   slider.oninput = function () {
     sensValue = slider.value;
+    console.log("Moved")
     document.getElementById("sensitivityReading").textContent = slider.value;
   }
 
@@ -128,39 +129,15 @@
         //OLD CODE STUFF
       }
     });
-    // Audio Code
-    var music = new Audio("http://curtastic.com/nightmare.mp3")
-    var chime = new Audio("cruz1.mp3")
-    var nothing = new Audio("http://touchbasicapp.com/nothing.wav")
-    var allAudio = []
-    allAudio.push(music)
-    allAudio.push(chime)
-    document.body.addEventListener('touchstart', function () {
-      if (allAudio) {
-        for (let audio of allAudio) {
-          audio.play()
-          audio.pause()
-          audio.currentTime = 0
-        }
-        allAudio = null
-      }
-    }, false)
-    function play() {
-      // var audio = document.getElementById("audio");
-      // audio.setAttribute('src', 'cruz1.mp3');
-
-      chime.play();
-    }
-    // Audio Test
-    var nothing = new Audio('http://touchbasicapp.com/nothing.wav')
-    window.onload = function () {
-      nothing.play().then(function () {
-        alert('Audio started unlocked!')
-      }).catch(function () {
-        alert('Audio started locked')
-      })
-    }
   }
+  document.getElementById("audioPermsButton").addEventListener("click", function () {
+    var audio = document.getElementById("audio");
+    console.log("clicked")
+    audio.setAttribute('src', 'cruz1.mp3');
+    audio.play();
+  });
+
+
 </script>
 
 </html>
