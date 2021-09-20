@@ -48,6 +48,10 @@
             }
             if (px > 70) {
               myAudio.play();
+              var h = document.createElement("H1");
+              var t = document.createTextNode("Hello World");
+              h.appendChild(t);
+              document.body.appendChild(h);
             }
 
             py = py + vy * .5;
