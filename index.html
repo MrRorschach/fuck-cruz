@@ -80,19 +80,6 @@
   <div class="indicatorDot" style="left:30%; top:30%;"></div>
 </body>
 <script>
-  function setupAudio() {
-    const soundEffect = new Audio();
-
-    // onClick of first interaction on page before I need the sounds
-    soundEffect.play();
-  }
-  function play() {
-    var audio = document.getElementById("audio");
-    audio.setAttribute('src', 'cruz1.mp3');
-
-    audio.play();
-  }
-
 
 
   var slider = document.getElementById("sensitivity")
@@ -143,7 +130,7 @@
     });
     // Audio Code
     var music = new Audio("http://curtastic.com/nightmare.mp3")
-    var chime = new Audio("http://curtastic.com/gold.wav")
+    var chime = new Audio("cruz1.mp3")
     var nothing = new Audio("http://touchbasicapp.com/nothing.wav")
     var allAudio = []
     allAudio.push(music)
@@ -158,7 +145,12 @@
         allAudio = null
       }
     }, false)
+    function play() {
+      // var audio = document.getElementById("audio");
+      // audio.setAttribute('src', 'cruz1.mp3');
 
+      chime.play();
+    }
     // Audio Test
     var nothing = new Audio('http://touchbasicapp.com/nothing.wav')
     window.onload = function () {
