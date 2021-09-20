@@ -64,7 +64,7 @@
   <button id="accelPermsButton" style="height:50px;" onclick="getAccel()">
     <h1>Get Accelerometer Permissions</h1>
   </button>
-  <button id="audioPermsButton" style="height:50px;" onclick="getAudio()">
+  <button id="audioPermsButton" style="height:50px;" onclick="setupAudio()">
     <h1>Test Audio</h1>
   </button>
   <input type="button" value="PLAY" onclick="play()">
@@ -80,19 +80,21 @@
   <div class="indicatorDot" style="left:30%; top:30%;"></div>
 </body>
 <script>
+  function setupAudio() {
+    const soundEffect = new Audio();
 
+    // onClick of first interaction on page before I need the sounds
+    soundEffect.play();
+  }
   function play() {
     var audio = document.getElementById("audio");
+    audio.setAttribute('src', 'cruz1.mp3');
+
     audio.play();
   }
 
 
-  // var myAudio = document.createElement('audio');
 
-  // if (myAudio.canPlayType('audio/mpeg')) {
-  //   myAudio.setAttribute('src', 'cruz1.mp3');
-  // }
-  //TODO Fix this shit
   var slider = document.getElementById("sensitivity")
   var sensValue = 0;
 
@@ -125,7 +127,10 @@
           if (change > sensitivity) {
             alert('Shake!');
             document.getElementById('accelReading').textContent = change;
+            var audio = document.getElementById("audio");
+            audio.setAttribute('src', 'cruz1.mp3');
 
+            audio.play();
           }
 
           // Update new position
