@@ -16,6 +16,7 @@
   </style>
 
   <script>
+    var myAudio = new Audio('cruz1.mp3');
 
     var px = 50; // Position x and y
     var py = 50;
@@ -44,6 +45,9 @@
             if (px > 98 || px < 0) {
               px = Math.max(0, Math.min(98, px)) // Clip px between 0-98
               vx = 0;
+            }
+            if (px > 70) {
+              myAudio.play();
             }
 
             py = py + vy * .5;
