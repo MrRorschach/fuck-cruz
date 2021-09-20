@@ -21,6 +21,8 @@
     if (myAudio.canPlayType('audio/mpeg')) {
       myAudio.setAttribute('src', 'cruz1.mp3');
     }
+    document.getElementById("sensitivityReading").innerHTML = document.getElementById('sensitivity').value;
+    var x = document.getElementById("sensitivity").value
     var px = 50; // Position x and y
     var py = 50;
     var vx = 0.0; // Velocity x and y
@@ -58,10 +60,10 @@
             //   started = true;
             // }
             if (px > 70) {
-              var h = document.createElement("H1");
-              var t = document.createTextNode("Hello World");
-              h.appendChild(t);
-              document.body.appendChild(h);
+              // var h = document.createElement("H1");
+              // var t = document.createTextNode("Hello World");
+              // h.appendChild(t);
+              // document.body.appendChild(h);
             }
 
             py = py + vy * .5;
@@ -93,6 +95,7 @@
   </button>
   <input type="range" id="sensitivity" name="sensitivity" min="0" max="100" value="90" step="1">
   <label for="sensitivity">sensitivity</label>
+  <h1 id="sensitivityReading"></h1>
   <div class="indicatorDot" style="left:30%; top:30%;"></div>
 </body>
 
