@@ -88,6 +88,9 @@
 
 </body>
 <script>
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
 
   function unlockAudio() {
@@ -112,7 +115,6 @@
 
   slider.oninput = function () {
     sensValue = slider.value;
-    console.log("Moved")
     document.getElementById("sensitivityReading").textContent = slider.value;
   }
 
@@ -137,10 +139,15 @@
           var change = Math.abs(x1 - x2 + y1 - y2 + z1 - z2);
 
           if (change > sensitivity) {
-            alert('Shake!');
             document.getElementById('accelReading').textContent = change;
             var audio = document.getElementById("audio");
-            audio.setAttribute('src', 'cruz1.mp3');
+            var cruzX = getRandomInt(3);
+            if (cruzX == 0) { audio.setAttribute('src', 'cruz2.mp3'); }
+            if (cruzX == 1) { audio.setAttribute('src', 'cruz3.mp3'); }
+            if (cruzX == 2) { audio.setAttribute('src', 'cruz4.mp3'); }
+
+
+
 
             audio.play();
           }
@@ -157,7 +164,11 @@
   document.getElementById("audioPermsButton").addEventListener("click", function () {
     var audio = document.getElementById("audio");
     console.log("clicked")
-    audio.setAttribute('src', 'cruz1.mp3');
+    var cruzX = getRandomInt(3);
+
+    if (cruzX == 0) { audio.setAttribute('src', 'cruz2.mp3'); }
+    if (cruzX == 1) { audio.setAttribute('src', 'cruz3.mp3'); }
+    if (cruzX == 2) { audio.setAttribute('src', 'cruz4.mp3'); }
     audio.play();
   });
   document.getElementById("audioStopButton").addEventListener("click", function () {
